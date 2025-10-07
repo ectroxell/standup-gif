@@ -6,7 +6,7 @@ Ever been in stand-up and wanted to show your team a gif of your daily update? T
 Our goal is to provide a quick and easy way to share your daily update with your team infused with a little fun.
 Type in your stand up update, select a tone, and let the app do the rest!
 
-## Install the dependencies
+### Install dependencies
 
 ```bash
 yarn
