@@ -1,6 +1,10 @@
-# StandUp.gif (standup-gif)
+# StandUp.gif 📺
 
 An ATC Innovation Day project
+
+Ever been in stand-up and wanted to show your team a gif of your daily update? This is the app for you!
+Our goal is to provide a quick and easy way to share your daily update with your team infused with a little fun.
+Type in your stand up update, select a tone, and let the app do the rest!
 
 ## Install the dependencies
 
@@ -15,29 +19,3 @@ npm install
 ```bash
 quasar dev
 ```
-
-### Lint the files
-
-```bash
-yarn lint
-# or
-npm run lint
-```
-
-### Format the files
-
-```bash
-yarn format
-# or
-npm run format
-```
-
-### Build the app for production
-
-```bash
-quasar build
-```
-
-### Customize the configuration
-
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
