@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-start items-center column q-mb-lg">
     <q-card tag="form" class="q-pa-md q-mt-lg" style="width: 400px;">
-      <strong>📺 Enter your stand up update and click submit! ✨</strong>
+      <p class="text-body1 text-center text-weight-medium q-mb-sm">📺 Enter your stand up update & click submit! ✨</p>
       <q-input
         :model-value="inputText"
         type="textarea"
@@ -18,7 +18,7 @@
         @click.prevent="resetForm"
         />
         <div>
-          <q-spinner v-if="loading" class="q-mr-2"/>
+          <q-spinner v-if="loading" class="q-mr-sm" color="secondary" size="24px" />
           <q-btn
             label="get your gif"
             color="primary"
@@ -41,7 +41,7 @@
             :src="result.images.fixed_height.url"
             :alt="result.title || 'GIF'"
             class="col-auto q-ma-sm"
-            style="width: 200px; height: 200px;"
+            style="width: 200px; height: 200px; cursor: pointer;"
             fit="contain"
             @error="onImageError"
             @click="copyToClipboard(result.images.fixed_height.url)"
