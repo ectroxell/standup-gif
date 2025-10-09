@@ -17,24 +17,26 @@
         />
       </q-card-actions>
     </q-card>
-    <q-card v-if="results && results.length > 0" class="q-pa-md q-mt-lg">
-      <div class="row q-gutter-md justify-center">
+    <div v-if="results && results.length > 0" class="q-pa-md q-mt-lg">
+      <q-card class="row justify-center">
         <q-img
           v-for="result in results"
           :key="result.id"
           :src="result.images.fixed_height.url"
           :alt="result.title || 'GIF'"
-          class="col-auto"
+          class="col-auto q-ma-md"
           style="width: 200px; height: 200px;"
           fit="contain"
           @error="onImageError"
+          @click="copyToClipboard(result.images.fixed_height.url)"
         />
-      </div>
-    </q-card>
+      </q-card>
+    </div>
   </q-page>
 </template>
 
 <script>
+import { copyToClipboard } from 'quasar';
 import { searchGiphy } from '../helpers/network';
 
 export default {
@@ -46,11 +48,10 @@ export default {
     }
   },
   methods: {
+    copyToClipboard,
     submit: async function () {
-      console.log('submitting!', this.inputText);
       try {
         this.results = await searchGiphy({ query: this.inputText });
-        console.log('Search results:', this.results);
         this.clearInput();
       } catch (error) {
         console.error('Error fetching GIFs:', error);
