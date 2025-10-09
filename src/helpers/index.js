@@ -8,7 +8,7 @@ export async function summarizeStandup(input) {
   const client = new OpenAI({ apiKey: OPENAI_API_KEY, dangerouslyAllowBrowser: true });
 
   const response = await client.responses.create({
-    model: "gpt-5-mini",
+    model: "gpt-5-nano",
     input: "Summarize this stand up update into search terms for a gif. Keep it 50 characters or less: " + input,
   });
 
