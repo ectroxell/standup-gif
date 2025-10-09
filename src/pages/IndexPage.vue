@@ -29,10 +29,10 @@
       </q-card-actions>
     </q-card>
     <div v-if="results && results.length > 0" class="q-mt-lg">
-      <q-card align="center">
-        <q-banner class="bg-primary text-white q-ma-md q-pa-sm flex column" style="height: 100px;">
+      <q-card align="center" style="width: 800px;">
+        <q-banner class="bg-primary text-white q-pa-sm flex column" style="height: 120px; width: 100%;">
           <p class="text-h6 q-mb-sm">You are: {{ tone }}</p>
-          <p class="text-subtitle1">{{ message }}<br>Click a gif to copy it to your clipboard and easily share with your team!</p>
+          <p class="text-subtitle1">{{ message }}<br>Click a gif to copy it to your clipboard and easily share with your team.</p>
         </q-banner>
         <q-card-section align="center">
           <q-img
@@ -52,7 +52,7 @@
     <div v-if="loading" class="q-mt-lg">
       <q-card class="row justify-center">
         <q-skeleton
-          v-for="i in 10" :key="i"
+          v-for="i in 9" :key="i"
           class="q-ma-md"
           style="width: 200px; height: 100px;"
           fit="contain"

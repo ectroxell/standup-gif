@@ -42,7 +42,7 @@ export async function searchGiphy(params) {
   }
 
   const encodedQuery = encodeURIComponent(query.trim());
-  const url = `https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_API_KEY}&q=${encodedQuery}&limit=10&offset=0&&lang=en&bundle=messaging_non_clips`;
+  const url = `https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_API_KEY}&q=${encodedQuery}&limit=9&offset=0&&lang=en&bundle=messaging_non_clips`;
 
   try {
     const response = await axios.get(url);
