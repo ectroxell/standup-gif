@@ -1,6 +1,6 @@
 <template>
-  <q-page class="flex flex-start items-center column">
-    <q-card tag="form" class="q-pa-md q-mt-xl" style="width: 400px;">
+  <q-page class="flex flex-start items-center column q-mb-lg">
+    <q-card tag="form" class="q-pa-md q-mt-lg" style="width: 400px;">
       <strong>📺 Enter your stand up update and click submit! ✨</strong>
       <q-input
         :model-value="inputText"
@@ -22,7 +22,7 @@
           <q-btn
             label="get your gif"
             color="primary"
-            :disable="loading"
+            :disable="loading || !inputText.trim()"
             @click.prevent="submit"
           />
         </div>
@@ -32,7 +32,7 @@
       <q-card align="center" style="width: 800px;">
         <q-banner class="bg-primary text-white q-pa-sm flex column" style="height: 120px; width: 100%;">
           <p class="text-h6 q-mb-sm">You are: {{ tone }}</p>
-          <p class="text-subtitle1">{{ message }}<br>Click a gif to copy it to your clipboard and easily share with your team.</p>
+          <p class="text-subtitle1">{{ message }}<br>Click a gif to copy the URL to your clipboard & easily share with your team.</p>
         </q-banner>
         <q-card-section align="center">
           <q-img
@@ -50,7 +50,8 @@
     </q-card>
     </div>
     <div v-if="loading" class="q-mt-lg">
-      <q-card class="row justify-center">
+      <q-card class="row justify-center" align="center" style="width: 800px;">
+        <q-skeleton type="QBanner" style="width: 800px; height: 120px;" />
         <q-skeleton
           v-for="i in 9" :key="i"
           class="q-ma-md"
@@ -80,6 +81,7 @@ export default {
   methods: {
     copyToClipboard,
     submit: async function () {
+      this.resetResults();
       this.loading = true;
       const { query, tone, message } = await summarizeStandup(this.inputText);
       try {
@@ -91,11 +93,17 @@ export default {
       }
       this.loading = false;
     },
-    resetForm: function () {
-      this.inputText = '';
+    resetResults: function () {
       this.results = null;
       this.tone = '';
       this.message = '';
+    },
+    resetInput: function () {
+      this.inputText = '';
+    },
+    resetForm: function () {
+      this.resetResults();
+      this.resetInput();
     },
     onImageError: function (event) {
       console.error('Image failed to load:', event.target.src);

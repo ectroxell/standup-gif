@@ -4,7 +4,7 @@
       <q-toolbar>
         <img
           alt="StandUp.gif logo"
-          src="../../public/assets/just-logo.png"
+          src="assets/just-logo.png"
           style="width: 64px; height: 64px"
         />
         <q-toolbar-title> StandUp.gif </q-toolbar-title>
