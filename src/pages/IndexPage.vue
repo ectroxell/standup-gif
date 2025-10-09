@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center">
     <img
-      alt="Quasar logo"
+      alt="StandUp.gif logo"
       src="~assets/standup-gif-logo.png"
       style="width: 400px; height: 400px"
     />
