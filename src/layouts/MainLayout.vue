@@ -13,6 +13,8 @@
   </q-layout>
 </template>
 
-<script setup>
-//
+<script>
+export default {
+  name: 'MainLayout'
+}
 </script>
