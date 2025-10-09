@@ -9,15 +9,16 @@ const instructions = `Summarize the user's stand-up update and detect tone. Turn
 ## Output Format
 Return a JSON object with these fields:
 - query: string. The Giphy search query (maximum 50 characters). Begin with tone.
-- tone: string. The inferred tone (e.g., 'motivated', 'frustrated', 'celebratory').
-
+- tone: string. The inferred tone plus a descriptive emoji (e.g., 'motivated 😁', 'frustrated 😡', 'celebratory 🎉').
+- message: string. Either a motivational message if there is a negative tone, or a celebratory message if there is a positive tone. You can be silly in this message and use Gen Z language/slang.
 Example:
 {
   "query": "relieved, productive finished major bug fix",
-  "tone": "relieved, productive"
+  "tone": "relieved, productive 😄",
+  "message": "You did it! Go off queen! 👑"
 }
 
-If the tone is ambiguous or unclear, use "neutral" for the tone field.`;
+If the tone is ambiguous or unclear, use "neutral 😐" for the tone field.`;
 
 export async function summarizeStandup(input) {
   const client = new OpenAI({ apiKey: OPENAI_API_KEY, dangerouslyAllowBrowser: true });
@@ -29,8 +30,8 @@ export async function summarizeStandup(input) {
   });
 
   const parsedResponse = JSON.parse(response.output_text);
-  const { query, tone } = parsedResponse;
-  return { query, tone };
+  const { query, tone, message } = parsedResponse;
+  return { query, tone, message };
 }
 
 export async function searchGiphy(params) {
@@ -41,7 +42,7 @@ export async function searchGiphy(params) {
   }
 
   const encodedQuery = encodeURIComponent(query.trim());
-  const url = `https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_API_KEY}&q=${encodedQuery}&limit=10&offset=0&rating=g&lang=en&bundle=messaging_non_clips`;
+  const url = `https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_API_KEY}&q=${encodedQuery}&limit=10&offset=0&&lang=en&bundle=messaging_non_clips`;
 
   try {
     const response = await axios.get(url);
