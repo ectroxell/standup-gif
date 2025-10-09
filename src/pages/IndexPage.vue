@@ -38,6 +38,7 @@
 <script>
 import { copyToClipboard } from 'quasar';
 import { searchGiphy } from '../helpers/network';
+import { summarizeStandup } from '../helpers/index';
 
 export default {
   name: 'IndexPage',
@@ -50,8 +51,10 @@ export default {
   methods: {
     copyToClipboard,
     submit: async function () {
+      const input = await summarizeStandup(this.inputText);
+      console.log(input);
       try {
-        this.results = await searchGiphy({ query: this.inputText });
+        this.results = await searchGiphy({ query: input });
         this.clearInput();
       } catch (error) {
         console.error('Error fetching GIFs:', error);
