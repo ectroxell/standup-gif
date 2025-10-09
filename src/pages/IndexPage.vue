@@ -17,27 +17,54 @@
         />
       </q-card-actions>
     </q-card>
-    <q-card tag="div" class="q-pa-md q-mt-lg">
-      <p>gif will go here</p>
+    <q-card v-if="results && results.length > 0" class="q-pa-md q-mt-lg">
+      <div class="row q-gutter-md justify-center">
+        <q-img
+          v-for="result in results"
+          :key="result.id"
+          :src="result.images.fixed_height.url"
+          :alt="result.title || 'GIF'"
+          class="col-auto"
+          style="width: 200px; height: 200px;"
+          fit="contain"
+          @error="onImageError"
+        />
+      </div>
     </q-card>
   </q-page>
 </template>
 
 <script>
+import { searchGiphy } from '../helpers/network';
+
 export default {
   name: 'IndexPage',
   data: function () {
     return {
-      inputText: ''
+      inputText: '',
+      results: null
     }
   },
   methods: {
-    submit: function () {
+    submit: async function () {
       console.log('submitting!', this.inputText);
-      this.clearInput();
+      try {
+        this.results = await searchGiphy({ query: this.inputText });
+        console.log('Search results:', this.results);
+        this.clearInput();
+      } catch (error) {
+        console.error('Error fetching GIFs:', error);
+      }
     },
     clearInput: function () {
       this.inputText = '';
+    },
+    resetForm: function () {
+      this.clearInput();
+      this.results = null;
+    },
+    onImageError: function (event) {
+      console.error('Image failed to load:', event.target.src);
     }
   }
 }
