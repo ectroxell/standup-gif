@@ -11,29 +11,29 @@
         @update:model-value="inputText = $event"
       />
       <q-card-actions align="between" >
+        <q-btn
+        label="reset"
+        color="secondary"
+        :disable="loading"
+        @click.prevent="resetForm"
+        />
         <div>
+          <q-spinner v-if="loading" class="q-mr-2"/>
           <q-btn
-            label="get that gif!"
+            label="get your gif"
             color="primary"
             :disable="loading"
             @click.prevent="submit"
           />
-          <q-spinner v-if="loading" class="q-ml-2"/>
         </div>
-        <q-btn
-          label="reset"
-          color="primary"
-          :disable="loading"
-          @click.prevent="resetForm"
-        />
       </q-card-actions>
     </q-card>
     <div v-if="results && results.length > 0" class="q-mt-lg">
       <q-card align="center">
-        <q-badge color="primary" class="q-ma-md q-pa-sm flex column" style="height: 100px;">
+        <q-banner class="bg-primary text-white q-ma-md q-pa-sm flex column" style="height: 100px;">
           <p class="text-h6 q-mb-sm">You are: {{ tone }}</p>
-          <p class="text-subtitle1 q-mb-sm">{{ message }}</p>
-        </q-badge>
+          <p class="text-subtitle1">{{ message }}<br>Click a gif to copy it to your clipboard and easily share with your team!</p>
+        </q-banner>
         <q-card-section align="center">
           <q-img
             v-for="result in results"

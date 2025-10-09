@@ -8,7 +8,7 @@
           style="width: 64px; height: 64px"
         />
         <q-toolbar-title> StandUp.gif </q-toolbar-title>
-        <div>Quasar v{{ $q.version }}</div>
+        <div>Quasar v{{ $q.version }} 💫</div>
       </q-toolbar>
     </q-header>
 
