@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-start items-center column">
-    <q-card tag="form" class="q-pa-md q-mt-xl">
-      <p>📺 Enter your stand up update, select a tone, and click submit! ✨</p>
+    <q-card tag="form" class="q-pa-md q-mt-xl" style="width: 400px;">
+      <strong>📺 Enter your stand up update and click submit! ✨</strong>
       <q-input
         :model-value="inputText"
         type="textarea"
@@ -11,14 +11,14 @@
         @update:model-value="inputText = $event"
       />
       <q-card-actions class="row justify-between">
-        <q-btn
-          label="get that gif!"
-          color="primary"
-          :disable="loading"
-          @click.prevent="submit"
-        />
-        <div v-if="loading">
-          <q-spinner class="q-mr-2"/>
+        <div>
+          <q-btn
+            label="get that gif!"
+            color="primary"
+            :disable="loading"
+            @click.prevent="submit"
+          />
+          <q-spinner v-if="loading" class="q-ml-2"/>
         </div>
         <q-btn
           label="reset"
@@ -28,7 +28,7 @@
         />
       </q-card-actions>
     </q-card>
-    <div v-if="results && results.length > 0" class="q-pa-md q-mt-lg">
+    <div v-if="results && results.length > 0" class="q-pa-lg q-mt-lg">
       <q-card class="row justify-center">
         <q-img
           v-for="result in results"
@@ -43,10 +43,10 @@
         />
       </q-card>
     </div>
-    <div v-if="loading" class="q-pa-md q-mt-lg">
+    <div v-if="loading" class="q-pa-lg q-mt-lg">
       <q-card class="row justify-center">
         <q-skeleton
-          v-for="i in 5" :key="i"
+          v-for="i in 10" :key="i"
           class="q-ma-md"
           style="width: 200px; height: 100px;"
           fit="contain"
@@ -58,8 +58,7 @@
 
 <script>
 import { copyToClipboard } from 'quasar';
-import { searchGiphy } from '../helpers/network';
-import { summarizeStandup } from '../helpers/index';
+import { searchGiphy, summarizeStandup } from '../network/index';
 
 export default {
   name: 'IndexPage',
@@ -74,10 +73,10 @@ export default {
     copyToClipboard,
     submit: async function () {
       this.loading = true;
-      const input = await summarizeStandup(this.inputText);
-      console.log(input);
+      const { query, tone } = await summarizeStandup(this.inputText);
+      console.log({query, tone});
       try {
-        this.results = await searchGiphy({ query: input });
+        this.results = await searchGiphy({ query });
         this.clearInput();
       } catch (error) {
         console.error('Error fetching GIFs:', error);

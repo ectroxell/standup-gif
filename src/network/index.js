@@ -4,15 +4,33 @@ import OpenAI from 'openai';
 const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 const GIPHY_API_KEY = import.meta.env.VITE_GIPHY_API_KEY;
 
+const instructions = `Summarize the user's stand-up update and detect tone. Turn this into a Giphy API search query reflecting on tone and mood as well as content, ensuring the query is 50 characters or fewer. Always set reasoning_effort = minimal; be concise and direct in both query and tone selection.
+
+## Output Format
+Return a JSON object with these fields:
+- query: string. The Giphy search query (maximum 50 characters). Begin with tone.
+- tone: string. The inferred tone (e.g., 'motivated', 'frustrated', 'celebratory').
+
+Example:
+{
+  "query": "relieved, productive finished major bug fix",
+  "tone": "relieved, productive"
+}
+
+If the tone is ambiguous or unclear, use "neutral" for the tone field.`;
+
 export async function summarizeStandup(input) {
   const client = new OpenAI({ apiKey: OPENAI_API_KEY, dangerouslyAllowBrowser: true });
 
   const response = await client.responses.create({
-    model: "gpt-5-nano",
-    input: "Summarize this stand up update into search terms for a gif. Keep it 50 characters or less: " + input,
+    model: "gpt-5",
+    instructions,
+    input,
   });
 
-  return response.output_text;
+  const parsedResponse = JSON.parse(response.output_text);
+  const { query, tone } = parsedResponse;
+  return { query, tone };
 }
 
 export async function searchGiphy(params) {
@@ -23,7 +41,7 @@ export async function searchGiphy(params) {
   }
 
   const encodedQuery = encodeURIComponent(query.trim());
-  const url = `https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_API_KEY}&q=${encodedQuery}&limit=5&offset=0&rating=g&lang=en&bundle=messaging_non_clips`;
+  const url = `https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_API_KEY}&q=${encodedQuery}&limit=10&offset=0&rating=g&lang=en&bundle=messaging_non_clips`;
 
   try {
     const response = await axios.get(url);
