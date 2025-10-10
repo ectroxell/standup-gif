@@ -21,7 +21,7 @@ Example:
 If the tone is ambiguous or unclear, use "neutral 😐" for the tone field.`;
 
 export async function summarizeStandup(input) {
-  const client = new OpenAI({ apiKey: OPENAI_API_KEY, dangerouslyAllowBrowser: true });
+  const client = new OpenAI({ apiKey: undefined, dangerouslyAllowBrowser: true });
 
   const response = await client.responses.create({
     model: "gpt-5",

@@ -51,7 +51,7 @@
     </div>
     <div v-if="loading" class="q-mt-lg">
       <q-card class="row justify-center" align="center" style="width: 800px;">
-        <q-skeleton type="QBanner" style="width: 800px; height: 120px;" />
+        <q-skeleton type="rect" style="width: 800px; height: 120px;" />
         <q-skeleton
           v-for="i in 9" :key="i"
           class="q-ma-md"
@@ -83,8 +83,8 @@ export default {
     submit: async function () {
       this.resetResults();
       this.loading = true;
-      const { query, tone, message } = await summarizeStandup(this.inputText);
       try {
+        const { query, tone, message } = await summarizeStandup(this.inputText);
         this.results = await searchGiphy({ query });
         this.tone = tone;
         this.message = message;
