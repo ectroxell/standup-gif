@@ -19,7 +19,7 @@
       <q-card-actions align="between" class="q-mt-lg">
         <q-btn label="Reset" color="secondary" :disable="loading" @click.prevent="resetForm" />
         <div>
-          <q-spinner v-if="loading" class="q-mr-sm" color="secondary" size="24px" />
+          <q-spinner v-if="loading" class="q-mr-md" color="secondary" size="24px" />
           <q-btn
             label="GIF Me!"
             color="primary"
@@ -32,24 +32,21 @@
     <div v-if="results && results.length > 0" class="q-mt-lg results-container">
       <q-card align="center">
         <q-banner class="bg-primary text-white q-pa-sm flex column banner-container">
-          <p class="text-h6 q-mb-sm">You are: {{ tone }}</p>
+          <p class="text-h6 q-mb-sm">Your update sounds {{ tone }}</p>
           <p class="text-subtitle1">{{ message }}</p>
         </q-banner>
         <q-card-section align="center">
-          <div>
-            <q-img
-              v-for="result in results"
-              :key="result.id"
-              :src="result.images.fixed_height.url"
-              :alt="result.title || 'GIF'"
-              :copied="result.copied"
-              class="col-auto q-ma-sm"
-              style="width: 200px; height: 200px; cursor: pointer"
-              fit="contain"
-              @error="onImageError"
-              @click="copyUpdate(result.bitly_url, result.id)"
-            />
-          </div>
+          <q-img
+            v-for="result in results"
+            :key="result.id"
+            :src="result.images.fixed_height.url"
+            :alt="result.title || 'GIF'"
+            class="col-auto q-ma-sm"
+            style="width: 200px; height: 200px; cursor: pointer"
+            fit="contain"
+            @error="onImageError"
+            @click="copyUpdate(result.bitly_url)"
+          />
         </q-card-section>
       </q-card>
     </div>
@@ -97,14 +94,14 @@ export default {
       tone: '',
       message: '',
       error: false,
+      copied: false,
     };
   },
   methods: {
-    copyUpdate: function (url, id) {
+    copyUpdate: function (url) {
       const header = `*📺 My StandUp.gif:*`;
       copyToClipboard(header + '\n\n' + this.inputText + '\n\n' + url);
-      const result = this.results.find((result) => result.id === id);
-      result.copied = true;
+      this.copied = true;
     },
     submit: async function () {
       this.resetResults();
@@ -125,6 +122,7 @@ export default {
       this.tone = '';
       this.message = '';
       this.error = false;
+      this.copied = false;
     },
     resetInput: function () {
       this.inputText = '';
