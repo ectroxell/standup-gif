@@ -20,6 +20,6 @@
 
 <script>
 export default {
-  name: 'ErrorNotFound'
+  name: 'ErrorNotFound',
 }
 </script>
