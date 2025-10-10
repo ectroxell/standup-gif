@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-start items-center column q-mb-lg q-px-md">
-    <q-card tag="form" class="q-pa-md q-mt-lg form-card">
+    <q-card tag="form" class="q-pa-md q-mt-xl form-card">
       <div class="text-body1 text-weight-medium text-left">
         <p class="q-mb-sm">Enter your update and click "GIF Me!" 📺</p>
         <p class="q-mb-sm">Click your favorite gif to copy it to your clipboard 📋</p>
@@ -29,7 +29,7 @@
         </div>
       </q-card-actions>
     </q-card>
-    <div v-if="results && results.length > 0" class="q-mt-lg results-container">
+    <div v-if="results && results.length > 0" class="q-mt-xl results-container">
       <q-card align="center">
         <q-banner class="bg-primary text-white flex column banner-container">
           <p class="text-h6 q-my-sm">Your update sounds {{ tone }}</p>
@@ -62,7 +62,7 @@
         </q-card-section>
       </q-card>
     </div>
-    <div v-if="loading" class="q-mt-lg results-container">
+    <div v-if="loading" class="q-my-xl results-container skeleton">
       <q-card class="row justify-center" align="center">
         <q-skeleton type="rect" class="banner-container skeleton" />
         <q-skeleton
@@ -74,7 +74,7 @@
         />
       </q-card>
     </div>
-    <div v-if="error" class="q-mt-lg results-container">
+    <div v-if="error" class="q-my-xl results-container">
       <q-card class="row justify-center" align="center">
         <q-banner class="bg-negative text-white q-pa-sm flex column banner-container">
           <p class="text-h6 q-mb-sm">❤️‍🩹 Uh oh! We're having trouble fetching your gif. ☹️</p>
@@ -156,12 +156,12 @@ export default {
 <style scoped>
 .form-card {
   width: 100%;
-  max-width: 566px;
+  max-width: 700px;
 }
 
 .results-container {
   width: 100%;
-  max-width: 800px;
+  max-width: 700px;
 }
 
 .banner-container {
