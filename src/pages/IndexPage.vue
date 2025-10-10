@@ -83,8 +83,8 @@
 </template>
 
 <script>
-import { copyToClipboard } from 'quasar'
-import { searchGiphy, summarizeStandup } from '../network/index'
+import { copyToClipboard } from 'quasar';
+import { searchGiphy, summarizeStandup } from '../network/index';
 
 export default {
   name: 'IndexPage',
@@ -96,40 +96,40 @@ export default {
       tone: '',
       message: '',
       error: false,
-    }
+    };
   },
   methods: {
     copyToClipboard,
     submit: async function () {
-      this.resetResults()
-      this.loading = true
+      this.resetResults();
+      this.loading = true;
       try {
-        const { query, tone, message } = await summarizeStandup(this.inputText)
-        this.results = await searchGiphy({ query })
-        this.tone = tone
-        this.message = message
+        const { query, tone, message } = await summarizeStandup(this.inputText);
+        this.results = await searchGiphy({ query });
+        this.tone = tone;
+        this.message = message;
       } catch (error) {
-        console.error('Error fetching GIFs:', error)
-        this.error = true
+        console.error('Error fetching GIFs:', error);
+        this.error = true;
       }
-      this.loading = false
+      this.loading = false;
     },
     resetResults: function () {
-      this.results = null
-      this.tone = ''
-      this.message = ''
-      this.error = false
+      this.results = null;
+      this.tone = '';
+      this.message = '';
+      this.error = false;
     },
     resetInput: function () {
-      this.inputText = ''
+      this.inputText = '';
     },
     resetForm: function () {
-      this.resetResults()
-      this.resetInput()
+      this.resetResults();
+      this.resetInput();
     },
     onImageError: function (event) {
-      console.error('Image failed to load:', event.target.src)
+      console.error('Image failed to load:', event.target.src);
     },
   },
-}
+};
 </script>

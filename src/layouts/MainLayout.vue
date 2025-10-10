@@ -26,12 +26,12 @@
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue'
+import EssentialLink from 'components/EssentialLink.vue';
 
 export default {
   name: 'MainLayout',
   components: {
     EssentialLink,
   },
-}
+};
 </script>
