@@ -1,21 +1,21 @@
 <template>
   <q-page class="flex flex-start items-center column q-mb-lg q-px-md">
     <q-card tag="form" class="q-pa-md q-mt-lg form-card">
-      <div class="text-body1 text-weight-medium text-left q-mb-sm">
-        <p>Enter your update and click "Gif Me!" 📺</p>
-        <p>Click your favorite gif to copy it to your clipboard 📋</p>
-        <p>Use CMD + V to paste your update and gif into slack to easily share with your team 📨</p>
+      <div class="text-body1 text-weight-medium text-left">
+        <p class="q-mb-sm">Enter your update and click "Gif Me!" 📺</p>
+        <p class="q-mb-sm">Click your favorite gif to copy it to your clipboard 📋</p>
+        <p class="q-mb-xs">Use CMD + V to paste your update and gif into slack to easily share with your team 📨</p>
       </div>
       <q-input
         :model-value="inputText"
         type="textarea"
-        class="q-ma-sm"
         label="What's your standup update?"
+        class="q-mx-xs"
         :disable="loading"
         @update:model-value="inputText = $event"
       />
-      <q-card-actions align="between">
-        <q-btn label="Reset Form" color="secondary" :disable="loading" @click.prevent="resetForm" />
+      <q-card-actions align="between" class="q-mt-lg">
+        <q-btn label="Reset" color="secondary" :disable="loading" @click.prevent="resetForm" />
         <div>
           <q-spinner v-if="loading" class="q-mr-sm" color="secondary" size="24px" />
           <q-btn
@@ -137,7 +137,7 @@ export default {
 <style scoped>
 .form-card {
   width: 100%;
-  max-width: 444px;
+  max-width: 566px;
 }
 
 .results-container {
