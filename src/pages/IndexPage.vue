@@ -156,5 +156,10 @@ export default {
   .results-container {
     max-width: 100%;
   }
+
+  .banner-container {
+    width: 100%;
+    height: 120px;
+  }
 }
 </style>
