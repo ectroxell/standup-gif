@@ -9,6 +9,7 @@
           class="q-my-sm"
         />
         <q-toolbar-title class="text-bold"> StandUp.gif </q-toolbar-title>
+        <EssentialLink title="About the App" link="/about" class="q-mx-sm" />
         <div>Quasar v{{ $q.version }} 💫</div>
       </q-toolbar>
     </q-header>
@@ -20,7 +21,12 @@
 </template>
 
 <script>
+import EssentialLink from 'components/EssentialLink.vue';
+
 export default {
-  name: 'MainLayout'
+  name: 'MainLayout',
+  components: {
+    EssentialLink
+  }
 }
 </script>
