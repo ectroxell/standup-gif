@@ -30,9 +30,9 @@
     </q-card>
     <div v-if="results && results.length > 0" class="q-mt-lg">
       <q-card align="center" style="width: 800px;">
-        <q-banner class="bg-primary text-white q-pa-sm flex column" style="height: 120px; width: 100%;">
+        <q-banner class="bg-primary text-white q-pa-sm flex column" style="height: 88px; width: 100%;">
           <p class="text-h6 q-mb-sm">You are: {{ tone }}</p>
-          <p class="text-subtitle1">{{ message }}<br>Click a gif to copy the URL to your clipboard & easily share with your team.</p>
+          <p class="text-subtitle1">{{ message }}</p>
         </q-banner>
         <q-card-section align="center">
           <q-img
@@ -51,7 +51,21 @@
     </div>
     <div v-if="loading" class="q-mt-lg">
       <q-card class="row justify-center" align="center" style="width: 800px;">
-        <q-skeleton type="rect" style="width: 800px; height: 120px;" />
+        <q-skeleton type="rect" style="width: 800px; height: 88px;" />
+        <q-skeleton
+          v-for="i in 9" :key="i"
+          class="q-ma-md"
+          style="width: 200px; height: 100px;"
+          fit="contain"
+        />
+      </q-card>
+    </div>
+    <div v-if="error" class="q-mt-lg">
+      <q-card class="row justify-center" align="center" style="width: 800px;">
+        <q-banner class="bg-negative text-white q-pa-sm flex column" style="height: 88px; width: 100%;">
+          <p class="text-h6 q-mb-sm">❤️‍🩹 Uh oh! We're having trouble fetching your gif. ☹️</p>
+          <p class="text-subtitle1 q-mb-sm">Please try again later.</p>
+        </q-banner>
         <q-skeleton
           v-for="i in 9" :key="i"
           class="q-ma-md"
@@ -75,7 +89,8 @@ export default {
       loading: false,
       results: null,
       tone: '',
-      message: ''
+      message: '',
+      error: false
     }
   },
   methods: {
@@ -90,6 +105,7 @@ export default {
         this.message = message;
       } catch (error) {
         console.error('Error fetching GIFs:', error);
+        this.error = true;
       }
       this.loading = false;
     },
@@ -97,6 +113,7 @@ export default {
       this.results = null;
       this.tone = '';
       this.message = '';
+      this.error = false;
     },
     resetInput: function () {
       this.inputText = '';
