@@ -90,8 +90,8 @@ export default defineConfig((/* ctx */) => {
           positive: '#4aba65',
           negative: '#c72c3e',
           info: '#7e9fe8',
-          warning: '#edb161'
-        }
+          warning: '#edb161',
+        },
       },
 
       // iconSet: 'material-icons', // Quasar icon set
