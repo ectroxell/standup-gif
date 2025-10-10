@@ -4,7 +4,9 @@
       <div class="text-body1 text-weight-medium text-left">
         <p class="q-mb-sm">Enter your update and click "Gif Me!" 📺</p>
         <p class="q-mb-sm">Click your favorite gif to copy it to your clipboard 📋</p>
-        <p class="q-mb-xs">Use CMD + V to paste your update and gif into slack to easily share with your team 📨</p>
+        <p class="q-mb-xs">
+          Use CMD + V to paste your update and gif into slack to easily share with your team 📨
+        </p>
       </div>
       <q-input
         :model-value="inputText"
@@ -29,9 +31,7 @@
     </q-card>
     <div v-if="results && results.length > 0" class="q-mt-lg results-container">
       <q-card align="center">
-        <q-banner
-          class="bg-primary text-white q-pa-sm flex column banner-container"
-        >
+        <q-banner class="bg-primary text-white q-pa-sm flex column banner-container">
           <p class="text-h6 q-mb-sm">You are: {{ tone }}</p>
           <p class="text-subtitle1">{{ message }}</p>
         </q-banner>
@@ -64,9 +64,7 @@
     </div>
     <div v-if="error" class="q-mt-lg results-container">
       <q-card class="row justify-center" align="center">
-        <q-banner
-          class="bg-negative text-white q-pa-sm flex column banner-container"
-        >
+        <q-banner class="bg-negative text-white q-pa-sm flex column banner-container">
           <p class="text-h6 q-mb-sm">❤️‍🩹 Uh oh! We're having trouble fetching your gif. ☹️</p>
           <p class="text-subtitle1 q-mb-sm">Please try again later.</p>
         </q-banner>
