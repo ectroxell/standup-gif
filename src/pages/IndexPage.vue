@@ -31,10 +31,20 @@
     </q-card>
     <div v-if="results && results.length > 0" class="q-mt-lg results-container">
       <q-card align="center">
-        <q-banner class="bg-primary text-white q-pa-sm flex column banner-container">
-          <p class="text-h6 q-mb-sm">Your update sounds {{ tone }}</p>
-          <p class="text-subtitle1">{{ message }}</p>
+        <q-banner class="bg-primary text-white flex column banner-container">
+          <p class="text-h6 q-my-sm">Your update sounds {{ tone }}</p>
+          <p class="text-subtitle1 q-mb-sm">{{ message }}</p>
         </q-banner>
+        <q-slide-transition :duration="600">
+          <div v-show="copied">
+            <q-banner class="bg-positive text-white q-pa-sm">
+              <div class="flex items-center justify-center q-my-sm">
+                <q-icon name="check_circle" size="sm" class="q-mr-sm" />
+                <span class="text-body1">Copied to clipboard! Your update and GIF are ready to paste ✨</span>
+              </div>
+            </q-banner>
+          </div>
+        </q-slide-transition>
         <q-card-section align="center">
           <q-img
             v-for="result in results"
@@ -102,6 +112,9 @@ export default {
       const header = `*📺 My StandUp.gif:*`;
       copyToClipboard(header + '\n\n' + this.inputText + '\n\n' + url);
       this.copied = true;
+      setTimeout(() => {
+        this.copied = false;
+      }, 5000);
     },
     submit: async function () {
       this.resetResults();
@@ -151,7 +164,7 @@ export default {
 
 .banner-container {
   width: 100%;
-  height: 96px;
+  max-height: 120px;
 }
 
 @media (max-width: 600px) {
@@ -161,11 +174,6 @@ export default {
 
   .results-container {
     max-width: 100%;
-  }
-
-  .banner-container {
-    width: 100%;
-    height: 120px;
   }
 }
 </style>
