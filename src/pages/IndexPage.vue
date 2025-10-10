@@ -64,7 +64,7 @@
     </div>
     <div v-if="loading" class="q-mt-lg results-container">
       <q-card class="row justify-center" align="center">
-        <q-skeleton type="rect" class="banner-container" />
+        <q-skeleton type="rect" class="banner-container skeleton" />
         <q-skeleton
           v-for="i in 9"
           :key="i"
@@ -167,6 +167,9 @@ export default {
 .banner-container {
   width: 100%;
   max-height: 120px;
+  &.skeleton {
+    height: 96px;
+  }
 }
 
 @media (max-width: 600px) {
