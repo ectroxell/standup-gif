@@ -40,7 +40,9 @@
             <q-banner class="bg-positive text-white q-pa-sm">
               <div class="flex items-center justify-center q-my-sm">
                 <q-icon name="check_circle" size="sm" class="q-mr-sm" />
-                <span class="text-body1">Copied to clipboard! Your update and GIF are ready to paste ✨</span>
+                <span class="text-body1"
+                  >Copied to clipboard! Your update and GIF are ready to paste ✨</span
+                >
               </div>
             </q-banner>
           </div>
