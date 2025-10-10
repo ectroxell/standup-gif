@@ -15,7 +15,7 @@
         </q-toolbar-title>
         <div class="flex items-center">
           <EssentialLink title="About the App" link="/about" class="q-mx-sm" />
-          <div>Quasar v{{ $q.version }} 💫</div>
+          <div class="gt-xs">Quasar v{{ $q.version }} 💫</div>
         </div>
       </q-toolbar>
     </q-header>
