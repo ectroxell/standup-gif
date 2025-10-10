@@ -2,7 +2,7 @@
   <q-page class="flex flex-start items-center column q-mb-lg q-px-md">
     <q-card tag="form" class="q-pa-md q-mt-lg form-card">
       <div class="text-body1 text-weight-medium text-left">
-        <p class="q-mb-sm">Enter your update and click "Gif Me!" 📺</p>
+        <p class="q-mb-sm">Enter your update and click "GIF Me!" 📺</p>
         <p class="q-mb-sm">Click your favorite gif to copy it to your clipboard 📋</p>
         <p class="q-mb-xs">
           Use CMD + V to paste your update and gif into slack to easily share with your team 📨
@@ -21,7 +21,7 @@
         <div>
           <q-spinner v-if="loading" class="q-mr-sm" color="secondary" size="24px" />
           <q-btn
-            label="Gif Me!"
+            label="GIF Me!"
             color="primary"
             :disable="loading || !inputText.trim()"
             @click.prevent="submit"
@@ -36,17 +36,20 @@
           <p class="text-subtitle1">{{ message }}</p>
         </q-banner>
         <q-card-section align="center">
-          <q-img
-            v-for="result in results"
-            :key="result.id"
-            :src="result.images.fixed_height.url"
-            :alt="result.title || 'GIF'"
-            class="col-auto q-ma-sm"
-            style="width: 200px; height: 200px; cursor: pointer"
-            fit="contain"
-            @error="onImageError"
-            @click="copyToClipboard(result.images.fixed_height.url)"
-          />
+          <div>
+            <q-img
+              v-for="result in results"
+              :key="result.id"
+              :src="result.images.fixed_height.url"
+              :alt="result.title || 'GIF'"
+              :copied="result.copied"
+              class="col-auto q-ma-sm"
+              style="width: 200px; height: 200px; cursor: pointer"
+              fit="contain"
+              @error="onImageError"
+              @click="copyUpdate(result.bitly_url, result.id)"
+            />
+          </div>
         </q-card-section>
       </q-card>
     </div>
@@ -97,7 +100,12 @@ export default {
     };
   },
   methods: {
-    copyToClipboard,
+    copyUpdate: function (url, id) {
+      const header = `*📺 My StandUp.gif:*`;
+      copyToClipboard(header + '\n\n' + this.inputText + '\n\n' + url);
+      const result = this.results.find((result) => result.id === id);
+      result.copied = true;
+    },
     submit: async function () {
       this.resetResults();
       this.loading = true;
