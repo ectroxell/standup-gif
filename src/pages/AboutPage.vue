@@ -48,8 +48,8 @@
       </p>
       <p class="text-body1">
         I'm based in <strong>St. Louis, Missouri</strong> and you can find me on
-        <a href="https://github.com/EmmaTroxell" target="_blank" class="text-primary">GitHub</a>
-        and <a href="https://www.linkedin.com/in/emmatroxell/" target="_blank" class="text-primary">LinkedIn</a>.
+        <a href="https://github.com/ectroxell" target="_blank" class="text-primary">GitHub</a>
+        and <a href="https://www.linkedin.com/in/emma-troxell/" target="_blank" class="text-primary">LinkedIn</a>.
       </p>
     </div>
   </q-page>
