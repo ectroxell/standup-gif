@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-start items-center column q-mb-lg">
-    <q-card tag="form" class="q-pa-md q-mt-lg" style="width: 400px;">
-      <p class="text-body1 text-center text-weight-medium q-mb-sm">📺 Enter your stand up update & click submit! ✨</p>
+    <q-card tag="form" class="q-pa-md q-mt-lg" style="width: 420px;">
+      <p class="text-body1 text-center text-weight-medium q-mb-sm">📺 Enter your stand up update to get your gif! ✨</p>
       <q-input
         :model-value="inputText"
         type="textarea"
@@ -12,7 +12,7 @@
       />
       <q-card-actions align="between" >
         <q-btn
-        label="reset"
+        label="Reset Form"
         color="secondary"
         :disable="loading"
         @click.prevent="resetForm"
@@ -20,7 +20,7 @@
         <div>
           <q-spinner v-if="loading" class="q-mr-sm" color="secondary" size="24px" />
           <q-btn
-            label="get your gif"
+            label="Gif Me!"
             color="primary"
             :disable="loading || !inputText.trim()"
             @click.prevent="submit"

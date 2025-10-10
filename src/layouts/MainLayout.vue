@@ -5,9 +5,10 @@
         <img
           alt="StandUp.gif logo"
           src="assets/just-logo.png"
-          style="width: 64px; height: 64px"
+          style="width: 58px; height: 58px"
+          class="q-my-sm"
         />
-        <q-toolbar-title> StandUp.gif </q-toolbar-title>
+        <q-toolbar-title class="text-bold"> StandUp.gif </q-toolbar-title>
         <div>Quasar v{{ $q.version }} 💫</div>
       </q-toolbar>
     </q-header>

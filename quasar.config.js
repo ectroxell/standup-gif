@@ -80,7 +80,7 @@ export default defineConfig((/* ctx */) => {
     framework: {
       config: {
         brand: {
-          primary: '#e69ae0',
+          primary: '#8ea9f1',
           secondary: '#f3c558',
           accent: '#f9f3e1',
 
@@ -89,7 +89,7 @@ export default defineConfig((/* ctx */) => {
 
           positive: '#4aba65',
           negative: '#c72c3e',
-          info: '#b37de8',
+          info: '#7e9fe8',
           warning: '#edb161'
         }
       },
