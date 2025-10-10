@@ -1,14 +1,16 @@
 <template>
-  <q-page class="flex flex-start items-center column q-mb-lg">
-    <q-card tag="form" class="q-pa-md q-mt-lg" style="width: 420px">
-      <p class="text-body1 text-center text-weight-medium q-mb-sm">
-        📺 Enter your stand up update to get your gif! ✨
-      </p>
+  <q-page class="flex flex-start items-center column q-mb-lg q-px-md">
+    <q-card tag="form" class="q-pa-md q-mt-lg form-card">
+      <div class="text-body1 text-weight-medium text-left q-mb-sm">
+        <p>Enter your update and click "Gif Me!" 📺</p>
+        <p>Click your favorite gif to copy it to your clipboard 📋</p>
+        <p>Use CMD + V to paste your update and gif into slack to easily share with your team 📨</p>
+      </div>
       <q-input
         :model-value="inputText"
         type="textarea"
         class="q-ma-sm"
-        label="Type away..."
+        label="What's your standup update?"
         :disable="loading"
         @update:model-value="inputText = $event"
       />
@@ -25,11 +27,10 @@
         </div>
       </q-card-actions>
     </q-card>
-    <div v-if="results && results.length > 0" class="q-mt-lg">
-      <q-card align="center" style="width: 800px">
+    <div v-if="results && results.length > 0" class="q-mt-lg results-container">
+      <q-card align="center">
         <q-banner
-          class="bg-primary text-white q-pa-sm flex column"
-          style="height: 88px; width: 100%"
+          class="bg-primary text-white q-pa-sm flex column banner-container"
         >
           <p class="text-h6 q-mb-sm">You are: {{ tone }}</p>
           <p class="text-subtitle1">{{ message }}</p>
@@ -49,9 +50,9 @@
         </q-card-section>
       </q-card>
     </div>
-    <div v-if="loading" class="q-mt-lg">
-      <q-card class="row justify-center" align="center" style="width: 800px">
-        <q-skeleton type="rect" style="width: 800px; height: 88px" />
+    <div v-if="loading" class="q-mt-lg results-container">
+      <q-card class="row justify-center" align="center">
+        <q-skeleton type="rect" class="banner-container" />
         <q-skeleton
           v-for="i in 9"
           :key="i"
@@ -61,11 +62,10 @@
         />
       </q-card>
     </div>
-    <div v-if="error" class="q-mt-lg">
-      <q-card class="row justify-center" align="center" style="width: 800px">
+    <div v-if="error" class="q-mt-lg results-container">
+      <q-card class="row justify-center" align="center">
         <q-banner
-          class="bg-negative text-white q-pa-sm flex column"
-          style="height: 88px; width: 100%"
+          class="bg-negative text-white q-pa-sm flex column banner-container"
         >
           <p class="text-h6 q-mb-sm">❤️‍🩹 Uh oh! We're having trouble fetching your gif. ☹️</p>
           <p class="text-subtitle1 q-mb-sm">Please try again later.</p>
@@ -133,3 +133,30 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.form-card {
+  width: 100%;
+  max-width: 444px;
+}
+
+.results-container {
+  width: 100%;
+  max-width: 800px;
+}
+
+.banner-container {
+  width: 100%;
+  height: 88px;
+}
+
+@media (max-width: 600px) {
+  .form-card {
+    max-width: 100%;
+  }
+
+  .results-container {
+    max-width: 100%;
+  }
+}
+</style>
