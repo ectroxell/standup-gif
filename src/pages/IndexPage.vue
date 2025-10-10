@@ -180,5 +180,9 @@ export default {
   .results-container {
     max-width: 100%;
   }
+
+  .banner-container {
+    max-width: 100%;
+  }
 }
 </style>
