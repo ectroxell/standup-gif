@@ -122,7 +122,8 @@ export default {
       this.resetResults();
       this.loading = true;
       try {
-        const { query, tone, message } = await summarizeStandup(this.inputText);
+        // const { query, tone, message } = await summarizeStandup(this.inputText);
+        const { query, tone, message } = { query: 'hello', tone: 'positive 🤩', message: 'hello, this is a longer mesaage. slay queen pussy boots 👢' };
         this.results = await searchGiphy({ query });
         this.tone = tone;
         this.message = message;
