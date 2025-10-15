@@ -13,6 +13,9 @@
         It's a lighthearted take on team communication designed to make work updates
         <em>a little more human</em> (and a lot more fun) 💛
       </p>
+      <p class="text-body1">
+        Check out my <a href="https://github.com/users/ectroxell/projects/2/views/1" target="_blank" class="text-primary">project board on GitHub</a> to see the progress of this project 🤓
+      </p>
       <h1 class="text-h4 text-left text-weight-medium q-mt-lg">👩‍💻 About the Developer</h1>
       <p class="text-body1">
         Hi! I'm <strong>Emma</strong>, a software developer with

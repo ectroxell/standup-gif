@@ -5,23 +5,32 @@ const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 const GIPHY_API_KEY = import.meta.env.VITE_GIPHY_API_KEY;
 
 const instructions = `
+## Background
+This is an app for generating a gif based on a user's stand-up update.
+Stand-up is a daily team update where team members share their progress and challenges.
+
+## Task
 Summarize the user's stand-up update and detect tone.
-Turn this into a Giphy API search query.
+Turn this into three different Giphy API search queries.
 
-The search query should mostly have to do with tone and mood of the user input
-and should be an action, gesture, mood, or relevant object.
+The first query should be a general action or gesture that is related to the tone.
 
-For example, if the tone is frustrated, you might make the search query
-"frustrated pulling hair out".
+The second query should be a specific action or gesture that is related to the content of the stand-up update.
 
-The search query should be 50 characters or fewer.
+The third query should be a specific feeling or common response that is related to the tone.
+
+The search queries should be 50 characters or fewer.
 
 Always set reasoning_effort = minimal; be concise and direct in both query
 and tone selection.
 
 ## Output Format
 Return a JSON object with these fields:
-- query: string. The Giphy search query (maximum 50 characters,
+- query1: string. The Giphy search query (maximum 50 characters,
+  e.g., "smiling", "pulling hair out", "thinking").
+- query2: string. The Giphy search query (maximum 50 characters,
+  e.g., "smiling", "pulling hair out", "thinking").
+- query3: string. The Giphy search query (maximum 50 characters,
   e.g., "smiling", "pulling hair out", "thinking").
 - tone: string. The inferred tone plus a descriptive emoji
   (e.g., 'motivated 😁', 'frustrated 😡', 'celebratory 🎉').
@@ -31,7 +40,9 @@ Return a JSON object with these fields:
 
 Example:
 {
-  "query": "relieved, productive finished major bug fix",
+  "query1": "sigh of relief",
+  "query2": "squash bug",
+  "query3": "phew",
   "tone": "relieved, productive 😄",
   "message": "You did it! Go off queen! 👑"
 }
@@ -49,8 +60,8 @@ export async function summarizeStandup(input) {
   });
 
   const parsedResponse = JSON.parse(response.output_text);
-  const { query, tone, message } = parsedResponse;
-  return { query, tone, message };
+  const { query1, query2, query3, tone, message } = parsedResponse;
+  return { query1, query2, query3, tone, message };
 }
 
 export async function searchGiphy(params) {
@@ -61,7 +72,7 @@ export async function searchGiphy(params) {
   }
 
   const encodedQuery = encodeURIComponent(query.trim());
-  const url = `https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_API_KEY}&q=${encodedQuery}&limit=9&offset=0&&lang=en&bundle=messaging_non_clips`;
+  const url = `https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_API_KEY}&q=${encodedQuery}&limit=3&offset=0&&lang=en&bundle=messaging_non_clips`;
 
   try {
     const response = await axios.get(url);

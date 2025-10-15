@@ -122,8 +122,11 @@ export default {
       this.resetResults();
       this.loading = true;
       try {
-        const { query, tone, message } = await summarizeStandup(this.inputText);
-        this.results = await searchGiphy({ query });
+        const { query1, query2, query3, tone, message } = await summarizeStandup(this.inputText);
+        const resultSet1 = await searchGiphy({ query: query1 });
+        const resultSet2 = await searchGiphy({ query: query2 });
+        const resultSet3 = await searchGiphy({ query: query3 });
+        this.results = [...resultSet1, ...resultSet2, ...resultSet3];
         this.tone = tone;
         this.message = message;
       } catch (error) {
