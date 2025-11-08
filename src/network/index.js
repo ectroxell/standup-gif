@@ -101,7 +101,7 @@ export async function generateMessageForAction(tone, summary, action) {
   For complimenting, you can over the top. Really gas them up. They asked for it! :)
   For motivating, you can also be over the top. You really believe in them. Talk like a cheesy motivational speaker. Be dramatic af. It's funny and ironic.
 
-  Always set reasoning_effort = minimal
+  Always set reasoning_effort = minimal; be concise in message selection.
 
   ## Output Format
   Return a JSON object with these fields:
