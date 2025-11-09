@@ -16,10 +16,24 @@
         :disable="loading"
         @update:model-value="inputText = $event"
       />
-      <q-card-actions align="between" class="q-mt-lg">
-        <q-btn label="Reset" color="secondary" glossy :disable="loading" @click.prevent="resetForm" />
+      <q-card-actions
+        align="between"
+        class="q-mt-lg"
+      >
+        <q-btn
+          label="Reset"
+          color="secondary"
+          glossy
+          :disable="loading"
+          @click.prevent="resetForm"
+        />
         <div>
-          <q-spinner v-if="loading" class="q-mr-md" color="secondary" size="24px" />
+          <q-spinner
+            v-if="loading"
+            class="q-mr-md"
+            color="secondary"
+            size="24px"
+          />
           <q-btn
             label="GIF Me!"
             color="primary"
@@ -42,7 +56,10 @@
           <p class="text-h6 q-my-sm">Your update sounds {{ tone }}</p>
         </q-banner>
         <q-slide-transition :duration="600">
-          <div v-show="copied" class="full-width">
+          <div
+            v-show="copied"
+            class="full-width"
+          >
             <q-banner class="bg-positive text-white q-pa-sm full-width">
               <div class="flex items-center justify-center q-my-sm">
                 <q-icon name="check_circle" size="sm" class="q-mr-sm" />
@@ -82,7 +99,10 @@
         class="row justify-center"
         align="center"
       >
-        <q-skeleton type="rect" class="banner-container skeleton" />
+        <q-skeleton
+          type="rect"
+          class="banner-container skeleton"
+        />
         <q-skeleton
           v-for="i in 9"
           :key="i"

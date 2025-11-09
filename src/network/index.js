@@ -98,14 +98,17 @@ export async function generateMessageForAction(options) {
 
   ## Task
   Generate a message ${action}ing the user based on the tone and summary of their stand-up update. This is the action they chose.
+  Generate a title for the message which will be displayed as the heading for the pop up.
   For roasting, you can be pretty mean. Like a mean comedian roast. This is a fun app!!
   For complimenting, you can over the top. Really gas them up. They asked for it! :)
   For motivating, you can also be over the top. You really believe in them. Talk like a cheesy motivational speaker. Be dramatic af. It's funny and ironic.
 
-  Always set reasoning_effort = minimal; be concise in message selection.
+  Always set reasoning_effort = minimal; be concise in message and title selection.
 
   ## Output Format
-  A string of the message for the user's stand-up update.
+  A JSON object with these fields:
+  - message: string. The message for the user's stand-up update.
+  - title: string. The title for the message which will be displayed as the heading for the pop up.
   `;
   const client = new OpenAI({ apiKey: OPENAI_API_KEY, dangerouslyAllowBrowser: true });
   const input = `The tone is ${tone}. The summary is: ${summary}.`;
@@ -116,7 +119,9 @@ export async function generateMessageForAction(options) {
     input,
   });
 
-  return response.output_text;
+  const parsedResponse = JSON.parse(response.output_text);
+  const { message, title } = parsedResponse;
+  return { message, title };
 }
 
 export async function searchGiphy(params) {

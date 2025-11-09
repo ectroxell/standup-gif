@@ -26,7 +26,7 @@
     <EssentialModal
       v-model="showModal"
       :loading="loading"
-      heading="Here ya go!"
+      :heading="title"
       :body="message"
       @hide="resetData"
     />
@@ -58,6 +58,7 @@ export default {
       loading: false,
       action: null,
       message: null,
+      title: null,
       showModal: false,
     };
   },
@@ -72,7 +73,9 @@ export default {
           summary: this.summary,
           action: this.action,
         }
-        this.message = await generateMessageForAction(options);
+        const { message, title } = await generateMessageForAction(options);
+        this.message = message;
+        this.title = title;
       } catch (error) {
         console.error('Error fetching message:', error);
       }
@@ -81,6 +84,7 @@ export default {
     resetData: function () {
       this.action = null;
       this.message = null;
+      this.title = null;
       this.showModal = false;
     },
   }

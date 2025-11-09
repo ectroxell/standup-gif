@@ -3,7 +3,12 @@
     <q-header elevated>
       <q-toolbar class="flex justify-between">
         <q-toolbar-title>
-          <q-item tag="a" to="/" class="items-center" style="padding-left: 0px">
+          <q-item
+            tag="a"
+            to="/"
+            class="items-center"
+            style="padding-left: 0px"
+          >
             <img
               alt="StandUp.gif logo"
               src="assets/just-logo.png"
@@ -14,7 +19,11 @@
           </q-item>
         </q-toolbar-title>
         <div class="flex items-center">
-          <EssentialLink title="About the App" link="/about" class="q-mx-sm" />
+          <EssentialLink
+            title="About the App"
+            link="/about"
+            class="q-mx-sm"
+          />
           <div class="gt-xs">Quasar v{{ $q.version }} 💫</div>
         </div>
       </q-toolbar>

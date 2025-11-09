@@ -1,16 +1,23 @@
 <template>
-  <q-dialog :model-value="modelValue" @update:model-value="$emit('update:modelValue', $event)">
-    <div v-if="loading" class="q-my-xl">
-      <q-card class="row justify-center" align="center">
+  <q-dialog
+    :model-value="modelValue"
+    no-backdrop-dismiss
+    @update:model-value="$emit('update:modelValue', $event)"
+  >
+    <div v-if="loading">
+      <q-card
+        class="row justify-center"
+        align="center"
+      >
         <q-skeleton type="rect" />
         <q-skeleton class="q-ma-md" />
       </q-card>
     </div>
-    <div v-else class="q-mt-xl">
+    <div v-else>
       <q-card>
-        <q-card-section>
+        <q-banner class="bg-primary text-white">
           <div class="text-h6">{{ heading }}</div>
-        </q-card-section>
+        </q-banner>
         <q-card-section>
           <div class="text-body1">{{ body }}</div>
         </q-card-section>
@@ -19,7 +26,8 @@
             flat
             glossy
             label="Close"
-            color="primary"
+            text-color="white"
+            class="bg-primary"
             v-close-popup
           />
         </q-card-actions>
@@ -43,7 +51,7 @@ export default {
     },
     heading: {
       type: String,
-      required: true,
+      default: 'Here ya go!',
     },
     body: {
       type: String,

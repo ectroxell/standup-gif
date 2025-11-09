@@ -14,7 +14,11 @@
         <em>a little more human</em> (and a lot more fun) 💛
       </p>
       <p class="text-body1">
-        Check out my <a href="https://github.com/users/ectroxell/projects/2/views/1" target="_blank" class="text-primary">project board on GitHub</a> to see the progress of this project 🤓
+        Check out my <a
+          href="https://github.com/users/ectroxell/projects/2/views/1"
+          target="_blank"
+          class="text-primary"
+        >project board on GitHub</a> to see the progress of this project 🤓
       </p>
       <h1 class="text-h4 text-left text-weight-medium q-mt-lg">👩‍💻 About the Developer</h1>
       <p class="text-body1">
@@ -40,16 +44,26 @@
       <p class="text-body1">
         When I'm not coding or mentoring, you can find me watching reality TV or keeping up with the
         current astrological transits (check out my other project,
-        <a href="https://www.moonology.net" target="_blank" class="text-primary">Moonology 🌙</a>,
+        <a
+          href="https://www.moonology.net"
+          target="_blank"
+          class="text-primary"
+        >Moonology 🌙</a>,
         for more on that).
       </p>
       <p class="text-body1">
         I'm based in <strong>St. Louis, Missouri</strong> and you can find me on
-        <a href="https://github.com/ectroxell" target="_blank" class="text-primary">GitHub</a>
+        <a
+          href="https://github.com/ectroxell"
+          target="_blank"
+          class="text-primary"
+        >GitHub</a>
         and
-        <a href="https://www.linkedin.com/in/emma-troxell/" target="_blank" class="text-primary"
-          >LinkedIn</a
-        >.
+        <a
+          href="https://www.linkedin.com/in/emma-troxell/"
+          target="_blank"
+          class="text-primary"
+        >LinkedIn</a>.
       </p>
     </div>
   </q-page>
