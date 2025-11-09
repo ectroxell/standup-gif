@@ -16,28 +16,51 @@
         :disable="loading"
         @update:model-value="inputText = $event"
       />
-      <q-card-actions align="between" class="q-mt-lg">
-        <q-btn label="Reset" color="secondary" :disable="loading" @click.prevent="resetForm" />
+      <q-card-actions
+        align="between"
+        class="q-mt-lg"
+      >
+        <q-btn
+          label="Reset"
+          color="secondary"
+          glossy
+          :disable="loading"
+          @click.prevent="resetForm"
+        />
         <div>
-          <q-spinner v-if="loading" class="q-mr-md" color="secondary" size="24px" />
+          <q-spinner
+            v-if="loading"
+            class="q-mr-md"
+            color="secondary"
+            size="24px"
+          />
           <q-btn
             label="GIF Me!"
             color="primary"
+            glossy
             :disable="loading || !inputText.trim()"
             @click.prevent="submit"
           />
         </div>
       </q-card-actions>
     </q-card>
-    <div v-if="results && results.length > 0" class="q-mt-xl results-container">
-      <q-card align="center">
+    <div
+      v-if="results && results.length > 0"
+      class="q-mt-xl results-container"
+    >
+      <q-card
+        class="row justify-center"
+        align="center"
+      >
         <q-banner class="bg-primary text-white flex column banner-container">
           <p class="text-h6 q-my-sm">Your update sounds {{ tone }}</p>
-          <p class="text-subtitle1 q-mb-sm">{{ message }}</p>
         </q-banner>
         <q-slide-transition :duration="600">
-          <div v-show="copied">
-            <q-banner class="bg-positive text-white q-pa-sm">
+          <div
+            v-show="copied"
+            class="full-width"
+          >
+            <q-banner class="bg-positive text-white q-pa-sm full-width">
               <div class="flex items-center justify-center q-my-sm">
                 <q-icon name="check_circle" size="sm" class="q-mr-sm" />
                 <span class="text-body1"
@@ -60,11 +83,26 @@
             @click="copyUpdate(result.bitly_url)"
           />
         </q-card-section>
+        <q-card-actions align="center">
+          <ActionButtons
+            :tone="tone"
+            :summary="summary"
+          />
+        </q-card-actions>
       </q-card>
     </div>
-    <div v-if="loading" class="q-my-xl results-container skeleton">
-      <q-card class="row justify-center" align="center">
-        <q-skeleton type="rect" class="banner-container skeleton" />
+    <div
+      v-if="loading"
+      class="q-my-xl results-container skeleton"
+    >
+      <q-card
+        class="row justify-center"
+        align="center"
+      >
+        <q-skeleton
+          type="rect"
+          class="banner-container skeleton"
+        />
         <q-skeleton
           v-for="i in 9"
           :key="i"
@@ -74,8 +112,14 @@
         />
       </q-card>
     </div>
-    <div v-if="error" class="q-my-xl results-container">
-      <q-card class="row justify-center" align="center">
+    <div
+      v-if="error"
+      class="q-my-xl results-container"
+    >
+      <q-card
+        class="row justify-center"
+        align="center"
+      >
         <q-banner class="bg-negative text-white q-pa-sm flex column banner-container">
           <p class="text-h6 q-mb-sm">❤️‍🩹 Uh oh! We're having trouble fetching your gif. ☹️</p>
           <p class="text-subtitle1 q-mb-sm">Please try again later.</p>
@@ -94,17 +138,27 @@
 
 <script>
 import { copyToClipboard } from 'quasar';
-import { searchGiphy, summarizeStandup } from '../network/index';
+
+import {
+  generateSearchQueries,
+  searchGiphy,
+  summarizeStandup,
+} from '../network/index';
+
+import ActionButtons from '../components/ActionButtons.vue';
 
 export default {
   name: 'IndexPage',
+  components: {
+    ActionButtons,
+  },
   data: function () {
     return {
       inputText: '',
       loading: false,
       results: null,
       tone: '',
-      message: '',
+      summary: '',
       error: false,
       copied: false,
     };
@@ -122,13 +176,14 @@ export default {
       this.resetResults();
       this.loading = true;
       try {
-        const { query1, query2, query3, tone, message } = await summarizeStandup(this.inputText);
+        const { tone, summary } = await summarizeStandup(this.inputText);
+        const { query1, query2, query3 } = await generateSearchQueries(this.inputText);
         const resultSet1 = await searchGiphy({ query: query1 });
         const resultSet2 = await searchGiphy({ query: query2 });
         const resultSet3 = await searchGiphy({ query: query3 });
-        this.results = [...resultSet1, ...resultSet2, ...resultSet3];
         this.tone = tone;
-        this.message = message;
+        this.summary = summary;
+        this.results = [...resultSet1, ...resultSet2, ...resultSet3];
       } catch (error) {
         console.error('Error fetching GIFs:', error);
         this.error = true;
@@ -138,7 +193,7 @@ export default {
     resetResults: function () {
       this.results = null;
       this.tone = '';
-      this.message = '';
+      this.summary = '';
       this.error = false;
       this.copied = false;
     },
