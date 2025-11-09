@@ -5,12 +5,26 @@
     @update:model-value="$emit('update:modelValue', $event)"
   >
     <div v-if="loading">
-      <q-card
-        class="row justify-center"
-        align="center"
-      >
-        <q-skeleton type="rect" />
-        <q-skeleton class="q-ma-md" />
+      <q-card style="min-width: 500px">
+        <q-skeleton
+          type="rect"
+          height="80px"
+        />
+        <q-card-section>
+          <q-skeleton
+            type="text"
+            class="text-subtitle1"
+          />
+          <q-skeleton
+            type="text"
+            class="text-subtitle1"
+          />
+          <q-skeleton
+            type="text"
+            width="60%"
+            class="text-subtitle1"
+          />
+        </q-card-section>
       </q-card>
     </div>
     <div v-else>
