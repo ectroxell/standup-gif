@@ -1,27 +1,32 @@
 <template>
-  <div>
+  <div class="q-mb-md">
     <q-btn
       label="Roast me 👹"
       color="primary"
+      class="q-mr-md"
+      glossy
       :disable="loading"
       @click.prevent="getMessageForAction('roast')"
     />
     <q-btn
       label="Compliment me 💖"
       color="primary"
+      glossy
       :disable="loading"
       @click.prevent="getMessageForAction('compliment')"
     />
     <q-btn
       label="Motivate me 🚀"
       color="primary"
+      class="q-ml-md"
+      glossy
       :disable="loading"
       @click.prevent="getMessageForAction('motivate')"
     />
     <EssentialModal
       v-model="showModal"
       :loading="loading"
-      :heading="`Here's your ${action}`"
+      heading="Here ya go!"
       :body="message"
       @hide="resetData"
     />

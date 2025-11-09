@@ -17,12 +17,13 @@
         @update:model-value="inputText = $event"
       />
       <q-card-actions align="between" class="q-mt-lg">
-        <q-btn label="Reset" color="secondary" :disable="loading" @click.prevent="resetForm" />
+        <q-btn label="Reset" color="secondary" glossy :disable="loading" @click.prevent="resetForm" />
         <div>
           <q-spinner v-if="loading" class="q-mr-md" color="secondary" size="24px" />
           <q-btn
             label="GIF Me!"
             color="primary"
+            glossy
             :disable="loading || !inputText.trim()"
             @click.prevent="submit"
           />
@@ -39,14 +40,10 @@
       >
         <q-banner class="bg-primary text-white flex column banner-container">
           <p class="text-h6 q-my-sm">Your update sounds {{ tone }}</p>
-          <ActionButtons
-            :tone="tone"
-            :summary="summary"
-          />
         </q-banner>
         <q-slide-transition :duration="600">
-          <div v-show="copied">
-            <q-banner class="bg-positive text-white q-pa-sm">
+          <div v-show="copied" class="full-width">
+            <q-banner class="bg-positive text-white q-pa-sm full-width">
               <div class="flex items-center justify-center q-my-sm">
                 <q-icon name="check_circle" size="sm" class="q-mr-sm" />
                 <span class="text-body1"
@@ -69,6 +66,12 @@
             @click="copyUpdate(result.bitly_url)"
           />
         </q-card-section>
+        <q-card-actions align="center">
+          <ActionButtons
+            :tone="tone"
+            :summary="summary"
+          />
+        </q-card-actions>
       </q-card>
     </div>
     <div

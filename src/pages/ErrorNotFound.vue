@@ -10,6 +10,7 @@
         color="white"
         text-color="primary"
         unelevated
+        glossy
         to="/"
         label="Go Home"
         no-caps

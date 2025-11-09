@@ -17,6 +17,7 @@
         <q-card-actions align="right">
           <q-btn
             flat
+            glossy
             label="Close"
             color="primary"
             v-close-popup
