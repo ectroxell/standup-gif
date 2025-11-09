@@ -18,44 +18,26 @@
       :disable="loading"
       @click.prevent="getMessageForAction('motivate')"
     />
-    <q-dialog v-model="showModal">
-      <div v-if="loading" class="q-my-xl">
-        <q-card class="row justify-center" align="center">
-          <q-skeleton type="rect" />
-          <q-skeleton
-            v-for="i in 9"
-            :key="i"
-            class="q-ma-md"
-          />
-        </q-card>
-      </div>
-      <div v-else class="q-mt-xl">
-        <q-card>
-          <q-card-section>
-            <div class="text-h6">Here's your {{ action }}</div>
-          </q-card-section>
-          <q-card-section>
-            <div class="text-body1">{{ message }}</div>
-          </q-card-section>
-          <q-card-actions align="right">
-            <q-btn
-              flat
-              label="Close"
-              color="primary"
-              @click.prevent="closeModal"
-            />
-          </q-card-actions>
-        </q-card>
-      </div>
-    </q-dialog>
+    <EssentialModal
+      v-model="showModal"
+      :loading="loading"
+      :heading="`Here's your ${action}`"
+      :body="message"
+      @hide="resetData"
+    />
   </div>
 </template>
 
 <script>
 import { generateMessageForAction } from '../network/index';
 
+import EssentialModal from './EssentialModal.vue';
+
 export default {
   name: 'ActionButtons',
+  components: {
+    EssentialModal,
+  },
   props: {
     tone: {
       type: String,
@@ -71,29 +53,31 @@ export default {
       loading: false,
       action: null,
       message: null,
+      showModal: false,
     };
   },
   methods: {
     getMessageForAction: async function (action) {
       this.action = action;
+      this.showModal = true;
       this.loading = true;
       try {
-        const { message } = await generateMessageForAction(this.tone, this.summary, this.action);
-        this.message = message;
+        const options = {
+          tone: this.tone,
+          summary: this.summary,
+          action: this.action,
+        }
+        this.message = await generateMessageForAction(options);
       } catch (error) {
         console.error('Error fetching message:', error);
       }
       this.loading = false;
     },
-    closeModal: function () {
+    resetData: function () {
       this.action = null;
       this.message = null;
+      this.showModal = false;
     },
-  },
-  computed: {
-    showModal: function () {
-      return !!this.action;
-    }
   }
 };
 </script>

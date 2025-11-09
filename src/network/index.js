@@ -88,7 +88,8 @@ export async function generateSearchQueries(input) {
   return { query1, query2, query3 };
 }
 
-export async function generateMessageForAction(tone, summary, action) {
+export async function generateMessageForAction(options) {
+  const { tone, summary, action } = options;
   const instructions = `
   ## Background
   This is an app for generating gifs and messages based on a user's stand-up update.
@@ -104,8 +105,7 @@ export async function generateMessageForAction(tone, summary, action) {
   Always set reasoning_effort = minimal; be concise in message selection.
 
   ## Output Format
-  Return a JSON object with these fields:
-  - message: string. The message for the user's stand-up update.
+  A string of the message for the user's stand-up update.
   `;
   const client = new OpenAI({ apiKey: OPENAI_API_KEY, dangerouslyAllowBrowser: true });
   const input = `The tone is ${tone}. The summary is: ${summary}.`;
@@ -116,9 +116,7 @@ export async function generateMessageForAction(tone, summary, action) {
     input,
   });
 
-  const parsedResponse = JSON.parse(response.output_text);
-  const { message } = parsedResponse;
-  return { message };
+  return response.output_text;
 }
 
 export async function searchGiphy(params) {
